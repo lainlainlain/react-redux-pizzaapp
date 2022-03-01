@@ -5,7 +5,6 @@ const Categories = ({ items }) => {
 
   const selectItemHandler = (index) => {
     setSelectItem(index);
-    console.log(selectItem);
   };
 
   return (
