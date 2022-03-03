@@ -15,18 +15,14 @@ function App() {
       .then((data) => setPizza(data.pizzas));
   }, []);
 
-  console.log(pizza);
-
   return (
-    <>
-      <div className="wrapper">
-        <Header></Header>
-        <Routes>
-          <Route path="/" element={<Home items={pizza}></Home>}></Route>
-          <Route path="/cart" element={<Cart></Cart>}></Route>
-        </Routes>
-      </div>
-    </>
+    <div className="wrapper">
+      <Header></Header>
+      <Routes>
+        <Route path="/" element={<Home items={pizza}></Home>}></Route>
+        <Route path="/cart" element={<Cart></Cart>}></Route>
+      </Routes>
+    </div>
   );
 }
 
