@@ -27,7 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchPizzas(category, sortBy));
-  }, [category, sortBy]);
+  }, [category, sortBy, dispatch]);
 
   const selectCategoryHandler = useCallback(
     (index) => {

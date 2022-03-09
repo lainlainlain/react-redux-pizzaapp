@@ -12,7 +12,8 @@ const SortPopup = React.memo(({ items, activeSortBy, onClickSortType }) => {
   };
 
   const toggleClickOutsideHandler = (e) => {
-    if (!e.path.includes(sortRef.current)) {
+    const path = e.path || (e.composePath && e.composedPath());
+    if (!path.includes(sortRef.current)) {
       setVisible(false);
     }
   };
