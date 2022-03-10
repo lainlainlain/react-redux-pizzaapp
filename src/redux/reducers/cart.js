@@ -5,19 +5,20 @@ const initialState = {
 };
 
 const cart = (state = initialState, action) => {
-  if (action.type === "SET_TOTAL_COUNT") {
-    return {
-      ...state,
-      totalCount: action.payload,
-    };
+  switch (action.type) {
+    case "ADD_PIZZA_CART":
+      return {
+        ...state,
+        items: {
+          [action.payload.id]: [
+            ...state.items[action.payload.id],
+            action.payload,
+          ],
+        },
+      };
+    default:
+      return state;
   }
-  if (action.type === "SET_TOTAL_PRICE") {
-    return {
-      ...state,
-      totalPrice: action.payload,
-    };
-  }
-  return state;
 };
 
 export default cart;

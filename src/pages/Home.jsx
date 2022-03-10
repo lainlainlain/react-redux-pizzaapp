@@ -43,6 +43,10 @@ const Home = () => {
     [dispatch]
   );
 
+  const addPizzaHandler = (obj) => {
+    console.log(obj);
+  };
+
   return (
     <>
       <div className="content">
@@ -63,7 +67,11 @@ const Home = () => {
           <div className="content__items">
             {isLoaded
               ? items.map((item, index) => (
-                  <PizzaBlock key={item.id} {...item}></PizzaBlock>
+                  <PizzaBlock
+                    onAddPizza={addPizzaHandler}
+                    key={item.id}
+                    {...item}
+                  ></PizzaBlock>
                 ))
               : Array(12)
                   .fill(0)
@@ -71,7 +79,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Outlet></Outlet>
     </>
   );
 };

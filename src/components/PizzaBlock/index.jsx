@@ -2,9 +2,19 @@ import React, { useState } from "react";
 
 import classNames from "classnames";
 
-const PizzaBlock = ({ name, price, imageUrl, sizes, types }) => {
+import Button from "../Button";
+
+const PizzaBlock = ({
+  id,
+  name,
+  price,
+  imageUrl,
+  sizes,
+  types,
+  onAddPizza,
+}) => {
   const [activeTypes, setactiveTypes] = useState(types[0]);
-  const [activesize, setActiveSize] = useState(sizes[0]);
+  const [activesize, setActiveSize] = useState(0);
 
   const availableNames = ["тонкое", "традиционное"];
   const availableSizes = [26, 30, 40];
@@ -15,6 +25,17 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types }) => {
 
   const selectSizeHandler = (index) => {
     setActiveSize(index);
+  };
+
+  const addPizzaHandler = () => {
+    const obj = {
+      id,
+      name,
+      price,
+      types: availableNames[activeTypes],
+      sizes: availableSizes[activesize],
+    };
+    onAddPizza(obj);
   };
 
   return (
@@ -58,7 +79,7 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types }) => {
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} Р</div>
-          <div className="button button--outline button--add">
+          <Button onClick={addPizzaHandler} className="button--add" outline>
             <svg
               width="12"
               height="12"
@@ -73,7 +94,7 @@ const PizzaBlock = ({ name, price, imageUrl, sizes, types }) => {
             </svg>
             <span>Добавить</span>
             <i>2</i>
-          </div>
+          </Button>
         </div>
       </div>{" "}
     </>
