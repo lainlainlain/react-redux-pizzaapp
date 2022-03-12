@@ -73,7 +73,9 @@ const Home = () => {
                     onAddPizza={addPizzaToCartHandler}
                     key={obj.id}
                     {...obj}
-                    addedCount={cartItems[obj.id] && cartItems[obj.id].length}
+                    addedCount={
+                      cartItems[obj.id] && cartItems[obj.id].items.length
+                    }
                   ></PizzaBlock>
                 ))
               : Array(12)
