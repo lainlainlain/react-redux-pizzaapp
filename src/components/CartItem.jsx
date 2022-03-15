@@ -9,10 +9,23 @@ const CartItem = ({
   totalPrice,
   totalCartCount,
   onRemove,
+  onPlus,
+  onMinus,
 }) => {
   const removeCartItemHandler = () => {
-    onRemove(id);
+    if (window.confirm("Вы действительно хотите удалить пиццу?")) {
+      onRemove(id);
+    }
   };
+
+  const plusCartItemHandler = () => {
+    onPlus(id);
+  };
+
+  const minusCartItemHandler = () => {
+    onMinus(id);
+  };
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -29,7 +42,10 @@ const CartItem = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <div
+          onClick={minusCartItemHandler}
+          className="button button--outline button--circle cart__item-count-minus"
+        >
           <svg
             width="10"
             height="10"
@@ -48,7 +64,10 @@ const CartItem = ({
           </svg>
         </div>
         <b>{totalCartCount}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <div
+          onClick={plusCartItemHandler}
+          className="button button--outline button--circle cart__item-count-plus"
+        >
           <svg
             width="10"
             height="10"

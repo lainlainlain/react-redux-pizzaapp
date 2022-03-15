@@ -25,8 +25,6 @@ const Home = () => {
   const { category, sortBy } = useSelector(({ filters }) => filters);
   const cartItems = useSelector(({ cart }) => cart.items);
 
-  console.log(category, sortBy);
-
   useEffect(() => {
     dispatch(fetchPizzas(category, sortBy));
   }, [category, sortBy, dispatch]);

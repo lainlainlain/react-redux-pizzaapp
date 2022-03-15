@@ -37,17 +37,17 @@ const cart = (state = initialState, action) => {
 
       // const items = Object.values(newItems).map((obj) => obj.items);
 
-      const totalArray = getTotalSum(newItems, "items.length");
+      const totalCount = getTotalSum(newItems, "items.length");
       const totalPrice = getTotalSum(newItems, "totalPrice");
 
-      // const totalArray = [].concat.apply([], items);
+      // const totalCount = [].concat.apply([], items);
 
-      // const totalPrice = getSum(totalArray);
+      // const totalPrice = getSum(totalCount);
 
       return {
         ...state,
         items: newItems,
-        totalCount: totalArray,
+        totalCount: totalCount,
         totalPrice,
       };
     }
@@ -70,6 +70,56 @@ const cart = (state = initialState, action) => {
         items: newItems,
         totalCount: state.totalCount - currentTotalCount,
         totalPrice: state.totalPrice - currentTotalPrice,
+      };
+    }
+    case "PLUS_CART_ITEM": {
+      const newItemsObj = [
+        ...state.items[action.payload].items,
+        state.items[action.payload].items[0],
+      ];
+
+      const newItems = {
+        ...state.items,
+        [action.payload]: {
+          items: newItemsObj,
+          totalPrice: getSum(newItemsObj),
+        },
+      };
+
+      const totalCount = getTotalSum(newItems, "items.length");
+      const totalPrice = getTotalSum(newItems, "totalPrice");
+
+      return {
+        ...state,
+        items: newItems,
+        totalCount,
+        totalPrice,
+      };
+    }
+    case "MINUS_CART_ITEM": {
+      const oldItems = state.items[action.payload].items;
+
+      const newItemsObj =
+        oldItems.length > 1
+          ? state.items[action.payload].items.slice(1)
+          : oldItems;
+
+      const newItems = {
+        ...state.items,
+        [action.payload]: {
+          items: newItemsObj,
+          totalPrice: getSum(newItemsObj),
+        },
+      };
+
+      const totalCount = getTotalSum(newItems, "items.length");
+      const totalPrice = getTotalSum(newItems, "totalPrice");
+
+      return {
+        ...state,
+        items: newItems,
+        totalCount,
+        totalPrice,
       };
     }
     default:

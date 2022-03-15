@@ -17,3 +17,17 @@ export const deleteCartItem = (id) => {
     payload: id,
   };
 };
+
+export const plusCartItem = (id) => {
+  return {
+    type: "PLUS_CART_ITEM",
+    payload: id,
+  };
+};
+
+export const minusCartItem = (id) => {
+  return {
+    type: "MINUS_CART_ITEM",
+    payload: id,
+  };
+};
